@@ -1,1256 +1,266 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>F1Flow — Your Journey. Our Flow. Your Future.</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --navy:#0A1628;--navy2:#0F1F3D;--blue:#1565C0;--blue2:#1976D2;--cyan:#00B4D8;
-  --cyan2:#48CAE4;--purple:#7C3AED;--purple2:#8B5CF6;--gold:#F59E0B;
-  --green:#10B981;--red:#EF4444;--orange:#F97316;
-  --surface:#111827;--surface2:#1F2937;--surface3:#374151;
-  --border:rgba(255,255,255,0.08);--border2:rgba(255,255,255,0.15);
-  --text:#F9FAFB;--text2:#D1D5DB;--text3:#9CA3AF;
-  --grad:linear-gradient(135deg,#1565C0,#00B4D8);
-  --grad2:linear-gradient(135deg,#7C3AED,#1565C0);
-  --grad3:linear-gradient(135deg,#F59E0B,#F97316);
-}
-body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--text);min-height:100vh;overflow-x:hidden}
-h1,h2,h3,h4{font-family:'Syne',sans-serif}
-
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,22,40,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 2rem;height:64px;display:flex;align-items:center;justify-content:space-between}
-.logo{display:flex;align-items:center;gap:12px;text-decoration:none}
-.logo-icon{width:36px;height:36px;background:var(--grad);border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:16px;color:#fff}
-.logo-text{font-family:'Syne',sans-serif;font-weight:800;font-size:20px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.nav-links{display:flex;gap:8px;align-items:center}
-.nav-link{color:var(--text3);text-decoration:none;font-size:14px;padding:6px 14px;border-radius:8px;transition:all 0.2s;border:none;background:none;cursor:pointer;font-family:'DM Sans',sans-serif}
-.nav-link:hover,.nav-link.active{color:var(--text);background:var(--surface2)}
-.nav-btn{background:var(--grad);color:#fff;border:none;padding:8px 20px;border-radius:10px;font-size:14px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:opacity 0.2s}
-.nav-btn:hover{opacity:0.85}
-
-/* PAGES */
-.page{display:none;min-height:100vh;padding-top:64px}
-.page.active{display:block}
-
-/* ===== LANDING ===== */
-#page-home{display:flex;flex-direction:column}
-.hero{min-height:calc(100vh - 64px);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:4rem 2rem}
-.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse at 20% 50%,rgba(21,101,192,0.15) 0%,transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(0,180,216,0.1) 0%,transparent 50%),radial-gradient(ellipse at 60% 80%,rgba(124,58,237,0.08) 0%,transparent 50%)}
-.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);background-size:60px 60px}
-.hero-content{position:relative;text-align:center;max-width:900px}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(21,101,192,0.15);border:1px solid rgba(21,101,192,0.3);border-radius:50px;padding:6px 16px;font-size:13px;color:var(--cyan2);margin-bottom:2rem}
-.hero-badge span{width:8px;height:8px;background:var(--cyan);border-radius:50%;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
-h1.hero-title{font-size:clamp(3rem,6vw,5.5rem);font-weight:800;line-height:1.05;margin-bottom:1.5rem;letter-spacing:-2px}
-.hero-title span{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.hero-sub{font-size:1.2rem;color:var(--text2);max-width:600px;margin:0 auto 2.5rem;line-height:1.7;font-weight:300}
-.hero-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
-.btn-primary{background:var(--grad);color:#fff;border:none;padding:14px 32px;border-radius:12px;font-size:16px;font-weight:500;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;display:inline-flex;align-items:center;gap:8px}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(21,101,192,0.4)}
-.btn-secondary{background:transparent;color:var(--text);border:1px solid var(--border2);padding:14px 32px;border-radius:12px;font-size:16px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s}
-.btn-secondary:hover{background:var(--surface2)}
-.hero-stats{display:flex;gap:3rem;justify-content:center;margin-top:4rem;padding-top:4rem;border-top:1px solid var(--border)}
-.stat h3{font-size:2rem;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.stat p{font-size:13px;color:var(--text3);margin-top:4px}
-
-/* MODULES GRID */
-.modules-section{padding:6rem 2rem;max-width:1200px;margin:0 auto}
-.section-label{font-size:12px;font-weight:600;color:var(--cyan);letter-spacing:3px;text-transform:uppercase;margin-bottom:1rem}
-.section-title{font-size:clamp(2rem,4vw,3rem);font-weight:800;margin-bottom:1rem;letter-spacing:-1px}
-.section-sub{color:var(--text3);font-size:16px;max-width:500px;margin-bottom:3rem;font-weight:300}
-.modules-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem}
-.module-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:2rem;cursor:pointer;transition:all 0.3s;position:relative;overflow:hidden}
-.module-card::before{content:'';position:absolute;inset:0;opacity:0;transition:opacity 0.3s;border-radius:20px}
-.module-card:hover{transform:translateY(-4px);border-color:var(--border2)}
-.module-card:hover::before{opacity:1}
-.mc-1::before{background:linear-gradient(135deg,rgba(21,101,192,0.08),transparent)}
-.mc-2::before{background:linear-gradient(135deg,rgba(124,58,237,0.08),transparent)}
-.mc-3::before{background:linear-gradient(135deg,rgba(16,185,129,0.08),transparent)}
-.mc-4::before{background:linear-gradient(135deg,rgba(0,180,216,0.08),transparent)}
-.mc-5::before{background:linear-gradient(135deg,rgba(245,158,11,0.08),transparent)}
-.mc-6::before{background:linear-gradient(135deg,rgba(239,68,68,0.08),transparent)}
-.mc-7::before{background:linear-gradient(135deg,rgba(139,92,246,0.08),transparent)}
-.module-icon{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:1.5rem}
-.mi-1{background:rgba(21,101,192,0.15)}
-.mi-2{background:rgba(124,58,237,0.15)}
-.mi-3{background:rgba(16,185,129,0.15)}
-.mi-4{background:rgba(0,180,216,0.15)}
-.mi-5{background:rgba(245,158,11,0.15)}
-.mi-6{background:rgba(239,68,68,0.15)}
-.mi-7{background:rgba(139,92,246,0.15)}
-.module-card h3{font-size:18px;font-weight:700;margin-bottom:8px}
-.module-card p{font-size:14px;color:var(--text3);line-height:1.6}
-.module-tag{display:inline-block;margin-top:1rem;font-size:12px;padding:4px 12px;border-radius:50px;background:var(--surface2);color:var(--text3)}
-
-/* ===== DASHBOARD ===== */
-#page-dashboard{padding:80px 2rem 2rem}
-.dash-grid{display:grid;grid-template-columns:1fr 340px;gap:1.5rem;max-width:1200px;margin:0 auto}
-.dash-main{display:flex;flex-direction:column;gap:1.5rem}
-.dash-sidebar{display:flex;flex-direction:column;gap:1.5rem}
-.card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.5rem}
-.card-title{font-size:14px;font-weight:600;color:var(--text2);margin-bottom:1.25rem;display:flex;align-items:center;gap:8px}
-.card-title svg{width:16px;height:16px;opacity:0.6}
-
-/* Profile welcome */
-.profile-card{background:linear-gradient(135deg,var(--navy2),var(--surface));border:1px solid var(--border)}
-.profile-inner{display:flex;align-items:center;gap:1.5rem}
-.avatar{width:60px;height:60px;background:var(--grad);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:22px;flex-shrink:0}
-.profile-info h2{font-size:22px;font-weight:700;margin-bottom:4px}
-.profile-info p{font-size:14px;color:var(--text3)}
-.profile-badges{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
-.badge{font-size:11px;padding:4px 10px;border-radius:50px;font-weight:500}
-.badge-blue{background:rgba(21,101,192,0.2);color:var(--cyan2);border:1px solid rgba(21,101,192,0.3)}
-.badge-green{background:rgba(16,185,129,0.15);color:#34D399;border:1px solid rgba(16,185,129,0.2)}
-.badge-purple{background:rgba(124,58,237,0.15);color:var(--purple2);border:1px solid rgba(124,58,237,0.2)}
-
-/* Timeline */
-.timeline-card{background:linear-gradient(135deg,rgba(21,101,192,0.1),rgba(0,180,216,0.05));border:1px solid rgba(21,101,192,0.2)}
-.countdown-display{text-align:center;padding:1.5rem 0}
-.countdown-num{font-size:5rem;font-weight:800;font-family:'Syne',sans-serif;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1}
-.countdown-label{font-size:14px;color:var(--text3);margin-top:4px}
-.timeline-bar{background:var(--surface2);border-radius:8px;height:8px;margin:1rem 0}
-.timeline-fill{height:100%;background:var(--grad);border-radius:8px;width:62%}
-.timeline-steps{display:flex;flex-direction:column;gap:10px;margin-top:1.25rem}
-.step-item{display:flex;align-items:center;gap:12px;font-size:14px}
-.step-dot{width:24px;height:24px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600}
-.step-done{background:rgba(16,185,129,0.2);color:#34D399;border:1px solid rgba(16,185,129,0.3)}
-.step-active{background:rgba(21,101,192,0.2);color:var(--cyan2);border:1px solid rgba(21,101,192,0.4)}
-.step-todo{background:var(--surface2);color:var(--text3);border:1px solid var(--border)}
-.step-text{flex:1}
-.step-text span{font-size:12px;color:var(--text3);display:block}
-
-/* Quick actions */
-.quick-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.qa-btn{background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:14px;cursor:pointer;text-align:left;transition:all 0.2s;font-family:'DM Sans',sans-serif;color:var(--text)}
-.qa-btn:hover{border-color:var(--border2);background:var(--surface3)}
-.qa-btn .icon{font-size:20px;margin-bottom:6px;display:block}
-.qa-btn .label{font-size:13px;font-weight:500}
-.qa-btn .sub{font-size:11px;color:var(--text3);margin-top:2px}
-
-/* Stat cards */
-.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1rem;text-align:center}
-.stat-card .num{font-size:28px;font-weight:800;font-family:'Syne',sans-serif}
-.stat-card .lbl{font-size:11px;color:var(--text3);margin-top:4px}
-
-/* Alerts */
-.alert{display:flex;gap:12px;align-items:flex-start;padding:12px 16px;border-radius:12px;font-size:13px;margin-bottom:10px}
-.alert-warn{background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.2);color:#FDE68A}
-.alert-info{background:rgba(21,101,192,0.1);border:1px solid rgba(21,101,192,0.2);color:var(--cyan2)}
-.alert-icon{flex-shrink:0;margin-top:2px}
-
-/* Mentors */
-.mentor-list{display:flex;flex-direction:column;gap:12px}
-.mentor-item{display:flex;align-items:center;gap:12px;padding:12px;background:var(--surface2);border-radius:12px;cursor:pointer;transition:all 0.2s;border:1px solid transparent}
-.mentor-item:hover{border-color:var(--border2)}
-.mentor-avatar{width:42px;height:42px;border-radius:50%;background:var(--grad2);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;flex-shrink:0}
-.mentor-info{flex:1}
-.mentor-info h4{font-size:14px;font-weight:600;margin-bottom:2px}
-.mentor-info p{font-size:12px;color:var(--text3)}
-.mentor-rating{font-size:12px;color:var(--gold)}
-.btn-sm{font-size:12px;padding:6px 14px;border-radius:8px;background:var(--surface3);border:1px solid var(--border);color:var(--text);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s}
-.btn-sm:hover{background:var(--blue);border-color:var(--blue)}
-.btn-sm-primary{background:var(--grad);border:none;color:#fff}
-.btn-sm-primary:hover{opacity:0.85}
-
-/* ===== MENTORS PAGE ===== */
-#page-mentors{padding:80px 2rem 2rem;max-width:1200px;margin:0 auto}
-.page-header{margin-bottom:2rem}
-.page-header h2{font-size:2rem;font-weight:800;margin-bottom:8px}
-.page-header p{color:var(--text3);font-size:15px}
-.filters{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:2rem}
-.filter-chip{padding:8px 16px;border-radius:50px;font-size:13px;border:1px solid var(--border);background:var(--surface);cursor:pointer;color:var(--text3);transition:all 0.2s;font-family:'DM Sans',sans-serif}
-.filter-chip.active,.filter-chip:hover{background:var(--blue);border-color:var(--blue);color:#fff}
-.mentors-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem}
-.mentor-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:1.5rem;transition:all 0.3s}
-.mentor-card:hover{transform:translateY(-3px);border-color:var(--border2)}
-.mentor-card-header{display:flex;align-items:flex-start;gap:12px;margin-bottom:1rem}
-.mentor-card-avatar{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:18px;flex-shrink:0}
-.mc-av1{background:linear-gradient(135deg,#1565C0,#00B4D8)}
-.mc-av2{background:linear-gradient(135deg,#7C3AED,#1565C0)}
-.mc-av3{background:linear-gradient(135deg,#10B981,#00B4D8)}
-.mc-av4{background:linear-gradient(135deg,#F59E0B,#F97316)}
-.mc-av5{background:linear-gradient(135deg,#EF4444,#F97316)}
-.mc-av6{background:linear-gradient(135deg,#8B5CF6,#EC4899)}
-.mentor-card-info h3{font-size:16px;font-weight:600}
-.mentor-card-info p{font-size:12px;color:var(--text3);margin-top:2px}
-.mentor-card-info .stars{font-size:12px;color:var(--gold);margin-top:4px}
-.verified{display:inline-flex;align-items:center;gap:4px;font-size:11px;color:#34D399;background:rgba(16,185,129,0.1);padding:3px 8px;border-radius:50px;border:1px solid rgba(16,185,129,0.2)}
-.tags{display:flex;flex-wrap:wrap;gap:6px;margin:1rem 0}
-.tag{font-size:11px;padding:4px 10px;border-radius:50px;background:var(--surface2);color:var(--text3);border:1px solid var(--border)}
-.trusted-by{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text3);margin-bottom:1rem}
-.trust-pill{background:rgba(21,101,192,0.1);color:var(--cyan2);border:1px solid rgba(21,101,192,0.2);padding:3px 10px;border-radius:50px;font-size:11px}
-.mentor-card-actions{display:flex;gap:8px}
-
-/* ===== COMMUNITY PAGE ===== */
-#page-community{padding:80px 2rem 2rem;max-width:900px;margin:0 auto}
-.post-form{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.25rem;margin-bottom:1.5rem}
-.post-form textarea{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:12px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;resize:none;height:80px;outline:none;transition:border-color 0.2s}
-.post-form textarea:focus{border-color:var(--blue)}
-.post-form-footer{display:flex;align-items:center;justify-content:space-between;margin-top:10px}
-.topic-pills{display:flex;gap:6px;flex-wrap:wrap}
-.topic-pill{font-size:11px;padding:4px 10px;border-radius:50px;background:var(--surface2);color:var(--text3);border:1px solid var(--border);cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s}
-.topic-pill.sel{background:rgba(21,101,192,0.2);color:var(--cyan2);border-color:rgba(21,101,192,0.3)}
-.posts{display:flex;flex-direction:column;gap:1rem}
-.post-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.25rem;transition:all 0.2s}
-.post-card:hover{border-color:var(--border2)}
-.post-meta{display:flex;align-items:center;gap:8px;margin-bottom:10px}
-.post-avatar{width:32px;height:32px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex-shrink:0}
-.post-author{font-size:13px;font-weight:500}
-.post-time{font-size:12px;color:var(--text3);margin-left:auto}
-.post-tag{font-size:11px;padding:2px 8px;border-radius:50px;margin-left:8px}
-.pt-opt{background:rgba(21,101,192,0.15);color:var(--cyan2)}
-.pt-arr{background:rgba(245,158,11,0.15);color:#FDE68A}
-.pt-job{background:rgba(16,185,129,0.15);color:#34D399}
-.pt-hou{background:rgba(124,58,237,0.15);color:var(--purple2)}
-.post-q{font-size:15px;font-weight:600;margin-bottom:6px}
-.post-body{font-size:13px;color:var(--text3);line-height:1.6;margin-bottom:10px}
-.post-footer{display:flex;align-items:center;gap:1rem;font-size:12px;color:var(--text3)}
-.post-action{cursor:pointer;display:flex;align-items:center;gap:4px;transition:color 0.2s}
-.post-action:hover{color:var(--cyan2)}
-
-/* ===== TRAVEL MATCHING ===== */
-#page-travel{padding:80px 2rem 2rem;max-width:1100px;margin:0 auto}
-.travel-hero{background:linear-gradient(135deg,rgba(21,101,192,0.15),rgba(0,180,216,0.08));border:1px solid rgba(21,101,192,0.2);border-radius:20px;padding:2.5rem;margin-bottom:2rem;display:flex;align-items:center;gap:2rem}
-.travel-hero-icon{font-size:4rem;flex-shrink:0}
-.travel-hero h2{font-size:1.75rem;font-weight:800;margin-bottom:8px}
-.travel-hero p{color:var(--text3);font-size:14px;line-height:1.6}
-.travel-form{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.5rem;margin-bottom:2rem}
-.form-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin-bottom:1rem}
-.form-group{display:flex;flex-direction:column;gap:6px}
-.form-group label{font-size:12px;color:var(--text3);font-weight:500;text-transform:uppercase;letter-spacing:1px}
-.form-group input,.form-group select{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:10px 14px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:14px;outline:none;transition:border-color 0.2s}
-.form-group input:focus,.form-group select:focus{border-color:var(--blue)}
-.form-group select option{background:var(--surface2)}
-.groups-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.25rem}
-.group-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.5rem;transition:all 0.3s}
-.group-card:hover{transform:translateY(-3px);border-color:rgba(21,101,192,0.3)}
-.group-route{display:flex;align-items:center;gap:10px;margin-bottom:1rem}
-.route-flag{font-size:24px}
-.route-arrow{color:var(--text3);font-size:18px}
-.route-info h4{font-size:15px;font-weight:600}
-.route-info p{font-size:12px;color:var(--text3)}
-.group-members{display:flex;align-items:center;gap:-8px;margin:1rem 0}
-.member-ava{width:30px;height:30px;border-radius:50%;border:2px solid var(--surface);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;margin-left:-8px}
-.member-ava:first-child{margin-left:0}
-.ma1{background:linear-gradient(135deg,#1565C0,#00B4D8)}
-.ma2{background:linear-gradient(135deg,#7C3AED,#1565C0)}
-.ma3{background:linear-gradient(135deg,#10B981,#00B4D8)}
-.ma4{background:linear-gradient(135deg,#F59E0B,#F97316)}
-.members-count{font-size:13px;color:var(--text3);margin-left:12px}
-.group-date{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--text3);margin-bottom:1rem}
-.group-actions{display:flex;gap:8px}
-
-/* ===== THINK LAB ===== */
-#page-thinklab{padding:80px 2rem 2rem;max-width:1100px;margin:0 auto}
-.ideas-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem;margin-top:2rem}
-.idea-card{background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:1.5rem;transition:all 0.3s;cursor:pointer}
-.idea-card:hover{transform:translateY(-3px);border-color:var(--border2)}
-.idea-cat{display:inline-flex;align-items:center;gap:6px;font-size:11px;padding:4px 12px;border-radius:50px;margin-bottom:1rem;font-weight:500}
-.ic-ai{background:rgba(124,58,237,0.15);color:var(--purple2)}
-.ic-health{background:rgba(16,185,129,0.15);color:#34D399}
-.ic-fintech{background:rgba(245,158,11,0.15);color:#FDE68A}
-.ic-social{background:rgba(239,68,68,0.15);color:#FCA5A5}
-.ic-edu{background:rgba(21,101,192,0.15);color:var(--cyan2)}
-.idea-card h3{font-size:16px;font-weight:700;margin-bottom:8px;line-height:1.4}
-.idea-card p{font-size:13px;color:var(--text3);line-height:1.6;margin-bottom:1rem}
-.validation{display:flex;align-items:center;gap:8px;margin-bottom:1rem}
-.val-icon{font-size:14px}
-.val-text{font-size:12px;color:var(--text3)}
-.val-count{font-size:12px;font-weight:600;color:var(--green)}
-.idea-author{display:flex;align-items:center;gap:8px;padding-top:1rem;border-top:1px solid var(--border)}
-.idea-ava{width:28px;height:28px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600}
-.idea-author-info{font-size:12px;color:var(--text3)}
-.idea-author-info strong{color:var(--text2)}
-.idea-actions{display:flex;gap:6px;margin-left:auto}
-
-/* ===== HOSPITALITY ===== */
-#page-hospitality{padding:80px 2rem 2rem;max-width:1100px;margin:0 auto}
-.arrival-checklist{background:linear-gradient(135deg,rgba(16,185,129,0.1),rgba(0,180,216,0.05));border:1px solid rgba(16,185,129,0.2);border-radius:20px;padding:2rem;margin-bottom:2rem}
-.checklist-title{font-size:18px;font-weight:700;margin-bottom:1.25rem;display:flex;align-items:center;gap:10px}
-.checklist-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
-.check-item{display:flex;align-items:center;gap:10px;background:rgba(0,0,0,0.2);border-radius:10px;padding:12px 14px;font-size:13px;cursor:pointer;transition:all 0.2s;border:1px solid transparent}
-.check-item:hover{border-color:rgba(16,185,129,0.3)}
-.check-item.done{opacity:0.6}
-.check-box{width:20px;height:20px;border-radius:6px;border:2px solid var(--text3);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;transition:all 0.2s}
-.check-item.done .check-box{background:var(--green);border-color:var(--green);color:#fff}
-.hosp-tabs{display:flex;gap:8px;margin-bottom:2rem;flex-wrap:wrap}
-.hosp-tab{padding:8px 20px;border-radius:50px;font-size:14px;border:1px solid var(--border);background:var(--surface);cursor:pointer;color:var(--text3);transition:all 0.2s;font-family:'DM Sans',sans-serif}
-.hosp-tab.active{background:var(--green);border-color:var(--green);color:#fff;font-weight:500}
-.hosp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1.25rem}
-.hosp-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:1.25rem;transition:all 0.2s}
-.hosp-card:hover{border-color:var(--border2)}
-.hosp-card-img{height:80px;border-radius:10px;margin-bottom:1rem;display:flex;align-items:center;justify-content:center;font-size:2.5rem}
-.hi-1{background:rgba(21,101,192,0.1)}
-.hi-2{background:rgba(124,58,237,0.1)}
-.hi-3{background:rgba(16,185,129,0.1)}
-.hi-4{background:rgba(245,158,11,0.1)}
-.hi-5{background:rgba(239,68,68,0.1)}
-.hi-6{background:rgba(0,180,216,0.1)}
-.hosp-card h4{font-size:15px;font-weight:600;margin-bottom:4px}
-.hosp-card p{font-size:12px;color:var(--text3);margin-bottom:8px;line-height:1.5}
-.hosp-meta{display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--text3)}
-.hosp-rating{color:var(--gold)}
-.hosp-dist{display:flex;align-items:center;gap:4px}
-
-/* ===== TRUST ===== */
-.trust-section{padding:6rem 2rem;background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-.trust-inner{max-width:1200px;margin:0 auto}
-.trust-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;margin-top:3rem}
-.trust-card{background:var(--navy);border:1px solid var(--border);border-radius:20px;padding:2rem;text-align:center}
-.trust-num{font-size:3rem;font-weight:800;font-family:'Syne',sans-serif;margin-bottom:8px}
-.trust-card h4{font-size:16px;font-weight:600;margin-bottom:8px}
-.trust-card p{font-size:13px;color:var(--text3);line-height:1.6}
-
-/* USER PROFILE MODAL */
-.profile-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:200;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
-.profile-modal.open{display:flex}
-.profile-modal-inner{background:var(--surface);border:1px solid var(--border2);border-radius:24px;padding:2.5rem;width:min(520px,90vw);max-height:80vh;overflow-y:auto;position:relative}
-.close-btn{position:absolute;top:1.25rem;right:1.25rem;background:var(--surface2);border:1px solid var(--border);border-radius:50%;width:32px;height:32px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--text2);font-size:18px;font-family:sans-serif;line-height:1}
-.form-label{font-size:12px;color:var(--text3);font-weight:500;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;display:block}
-
-/* FOOTER */
-footer{background:var(--navy);border-top:1px solid var(--border);padding:3rem 2rem;text-align:center}
-footer p{color:var(--text3);font-size:13px}
-.footer-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:24px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:1rem}
-
-/* RESPONSIVE */
-@media(max-width:768px){
-  .dash-grid{grid-template-columns:1fr}
-  .hero-stats{gap:1.5rem;flex-wrap:wrap}
-  .travel-hero{flex-direction:column;text-align:center}
-  nav{padding:0 1rem}
-  .nav-links{gap:4px}
-  .nav-link{padding:6px 10px;font-size:13px}
-}
-
-/* ANIMATIONS */
-@keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
-.page.active .hero-content{animation:fadeInUp 0.6s ease both}
-.module-card{animation:fadeInUp 0.5s ease both}
-.module-card:nth-child(1){animation-delay:0.05s}
-.module-card:nth-child(2){animation-delay:0.1s}
-.module-card:nth-child(3){animation-delay:0.15s}
-.module-card:nth-child(4){animation-delay:0.2s}
-.module-card:nth-child(5){animation-delay:0.25s}
-.module-card:nth-child(6){animation-delay:0.3s}
-.module-card:nth-child(7){animation-delay:0.35s}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>F1Flow - Student Journey Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=Syne:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-<!-- NAV -->
-<nav>
-  <a href="#" class="logo" onclick="showPage('home')">
-    <div class="logo-icon">F1</div>
-    <span class="logo-text">F1Flow</span>
-  </a>
-  <div class="nav-links">
-    <button class="nav-link active" onclick="showPage('home',this)">Home</button>
-    <button class="nav-link" onclick="showPage('dashboard',this)">Dashboard</button>
-    <button class="nav-link" onclick="showPage('mentors',this)">Mentors</button>
-    <button class="nav-link" onclick="showPage('community',this)">Community</button>
-    <button class="nav-link" onclick="showPage('travel',this)">Travel</button>
-    <button class="nav-link" onclick="showPage('thinklab',this)">Think Lab</button>
-    <button class="nav-link" onclick="showPage('hospitality',this)">Arrival</button>
-  </div>
-  <button class="nav-btn" onclick="openProfile()">Get Started</button>
-</nav>
-
-<!-- ===== HOME PAGE ===== -->
-<div id="page-home" class="page active">
-  <div class="hero">
-    <div class="hero-bg"></div>
-    <div class="hero-grid"></div>
-    <div class="hero-content">
-      <div class="hero-badge"><span></span> Now live — Kenya & USA pipelines</div>
-      <h1 class="hero-title">Your Journey.<br><span>Our Flow.</span><br>Your Future.</h1>
-      <p class="hero-sub">The operating system for international students — from arrival to career, built by someone who lived it.</p>
-      <div class="hero-actions">
-        <button class="btn-primary" onclick="showPage('dashboard')">🚀 Open Dashboard</button>
-        <button class="btn-secondary" onclick="showPage('mentors')">Find a Mentor</button>
-      </div>
-      <div class="hero-stats">
-        <div class="stat"><h3>1,200+</h3><p>Students guided</p></div>
-        <div class="stat"><h3>340+</h3><p>Active mentors</p></div>
-        <div class="stat"><h3>28</h3><p>Universities</p></div>
-        <div class="stat"><h3>97%</h3><p>OPT success rate</p></div>
-      </div>
+  <nav class="topbar">
+    <button class="brand" data-page="home" aria-label="Go to home">
+      <span class="brand-mark">F1</span>
+      <span class="brand-name">F1Flow</span>
+    </button>
+    <div class="nav-links" aria-label="Primary navigation">
+      <button class="nav-link active" data-page="home">Home</button>
+      <button class="nav-link" data-page="dashboard">Dashboard</button>
+      <button class="nav-link" data-page="mentors">Mentors</button>
+      <button class="nav-link" data-page="community">Community</button>
+      <button class="nav-link" data-page="profiles">Profiles</button>
+      <button class="nav-link" data-page="travel">Travel</button>
+      <button class="nav-link" data-page="thinklab">Think Lab</button>
+      <button class="nav-link" data-page="arrival">Arrival</button>
     </div>
-  </div>
-
-  <div class="modules-section">
-    <div class="section-label">Platform Modules</div>
-    <h2 class="section-title">Everything you need,<br>in one place</h2>
-    <p class="section-sub">Six powerful modules covering your entire international student journey.</p>
-
-    <div class="modules-grid">
-      <div class="module-card mc-1" onclick="showPage('dashboard')">
-        <div class="module-icon mi-1">📊</div>
-        <h3>Visa & Timeline Engine</h3>
-        <p>Personalized OPT/CPT countdowns, milestone tracking, and deadline alerts for your exact situation.</p>
-        <span class="module-tag">Core Feature</span>
+    <div class="nav-actions">
+      <div class="theme-switcher" aria-label="Theme switcher">
+        <button class="theme-option active" data-theme="light">Light</button>
+        <button class="theme-option" data-theme="dim">Dim</button>
+        <button class="theme-option" data-theme="dark">Dark</button>
       </div>
-      <div class="module-card mc-2" onclick="showPage('mentors')">
-        <div class="module-icon mi-2">🧑‍🏫</div>
-        <h3>Mentorship Marketplace</h3>
-        <p>Connect with verified mentors who've walked your exact path — same school, same visa, same journey.</p>
-        <span class="module-tag">Free & Paid</span>
-      </div>
-      <div class="module-card mc-3" onclick="showPage('community')">
-        <div class="module-icon mi-3">🤝</div>
-        <h3>Community Layer</h3>
-        <p>Peer-to-peer Q&A where real students share real answers about OPT, housing, jobs, and survival.</p>
-        <span class="module-tag">Always Free</span>
-      </div>
-      <div class="module-card mc-4" onclick="showPage('travel')">
-        <div class="module-icon mi-4">✈️</div>
-        <h3>Group Travel Matching</h3>
-        <p>Find students flying from your country to your university. Travel together, arrive together.</p>
-        <span class="module-tag">Viral Feature</span>
-      </div>
-      <div class="module-card mc-5" onclick="showPage('hospitality')">
-        <div class="module-icon mi-5">🏠</div>
-        <h3>Arrival & Hospitality</h3>
-        <p>Arrival checklist, curated housing, airport pickup, SIM cards, banking — your first week sorted.</p>
-        <span class="module-tag">Pre-arrival</span>
-      </div>
-      <div class="module-card mc-6" onclick="showPage('thinklab')">
-        <div class="module-icon mi-6">💡</div>
-        <h3>Think Lab</h3>
-        <p>Post your startup or research ideas, get mentor validation, find collaborators, and build your reputation.</p>
-        <span class="module-tag">Innovation</span>
-      </div>
-      <div class="module-card mc-7">
-        <div class="module-icon mi-7">🏅</div>
-        <h3>Trust & Reputation</h3>
-        <p>Build credibility through real interactions. "Trusted by mentors" signals employers can see and rely on.</p>
-        <span class="module-tag">Career Capital</span>
-      </div>
+      <button class="nav-cta" id="open-profile">Get Started</button>
     </div>
-  </div>
+  </nav>
 
-  <div class="trust-section">
-    <div class="trust-inner">
-      <div class="section-label" style="text-align:center">Why F1Flow Works</div>
-      <h2 class="section-title" style="text-align:center">Three gaps we actually fill</h2>
-      <div class="trust-cards">
-        <div class="trust-card">
-          <div class="trust-num" style="background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent">🧭</div>
-          <h4>The Direction Gap</h4>
-          <p>Students don't lack information — they lack clarity. We give personalized, stage-specific guidance so you always know what to do next.</p>
-        </div>
-        <div class="trust-card">
-          <div class="trust-num" style="background:var(--grad2);-webkit-background-clip:text;-webkit-text-fill-color:transparent">🤝</div>
-          <h4>The Trust Gap</h4>
-          <p>Real humans who've done it before. Our mentors are verified, rated, and matched to your exact situation — not just random strangers.</p>
-        </div>
-        <div class="trust-card">
-          <div class="trust-num" style="background:var(--grad3);-webkit-background-clip:text;-webkit-text-fill-color:transparent">🌍</div>
-          <h4>The Transition Gap</h4>
-          <p>Arrival is the hardest part. We guide you from airport to settled life with a checklist, housing, transport, and people traveling with you.</p>
+  <main>
+    <section id="page-home" class="page active">
+      <div class="hero">
+        <div class="hero-bg" aria-hidden="true"></div>
+        <div class="hero-content">
+          <p class="eyebrow"><span></span> Kenya and USA student pipeline</p>
+          <h1>Your Journey.<br><strong>Our Flow.</strong><br>Your Future.</h1>
+          <p class="hero-copy">A practical operating system for international students: visa deadlines, mentor matches, arrival logistics, community answers, and career capital in one place.</p>
+          <div class="hero-actions">
+            <button class="btn primary" data-page="dashboard">Open Dashboard</button>
+            <button class="btn secondary" data-page="mentors">Find a Mentor</button>
+          </div>
+          <div class="hero-stats">
+            <article><strong>1,200+</strong><span>Students guided</span></article>
+            <article><strong>340+</strong><span>Active mentors</span></article>
+            <article><strong>28</strong><span>Universities</span></article>
+            <article><strong>97%</strong><span>OPT success rate</span></article>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
 
-  <footer>
-    <div class="footer-logo">F1Flow</div>
-    <p>Your Journey. Our Flow. Your Future.</p>
-    <p style="margin-top:8px;font-size:12px">Built for international students, by international students. Kenya 🇰🇪 → USA 🇺🇸</p>
-  </footer>
-</div>
+      <section class="section">
+        <p class="section-label">Platform Modules</p>
+        <h2>Everything your student journey needs</h2>
+        <p class="section-copy">These modules are now wired to real front-end state instead of static cards.</p>
+        <div class="module-grid" id="module-grid"></div>
+      </section>
+    </section>
 
-<!-- ===== DASHBOARD PAGE ===== -->
-<div id="page-dashboard" class="page">
-  <div class="dash-grid">
-    <div class="dash-main">
-      <!-- Profile -->
-      <div class="card profile-card">
-        <div class="profile-inner">
-          <div class="avatar">FK</div>
-          <div class="profile-info">
-            <h2>Welcome back, Fredrick 👋</h2>
-            <p>Indiana University Bloomington · Health Informatics · F-1 Visa</p>
-            <div class="profile-badges">
-              <span class="badge badge-blue">F-1 Active</span>
-              <span class="badge badge-green">OPT Eligible</span>
-              <span class="badge badge-purple">Trusted by 3 mentors</span>
+    <section id="page-dashboard" class="page shell">
+      <div class="dashboard-grid">
+        <div class="stack">
+          <section class="panel profile-panel">
+            <div class="avatar" id="dashboard-initials">FK</div>
+            <div>
+              <h2 id="dashboard-name">Welcome back, Fredrick</h2>
+              <p id="dashboard-summary">Indiana University Bloomington · Health Informatics · F-1 Visa</p>
+              <div class="badges">
+                <span>F-1 Active</span>
+                <span>OPT Eligible</span>
+                <span>Trusted by 3 mentors</span>
+              </div>
             </div>
-          </div>
-        </div>
-      </div>
+          </section>
 
-      <!-- Timeline -->
-      <div class="card timeline-card">
-        <div class="card-title">📊 Your Visa Timeline</div>
-        <div class="countdown-display">
-          <div class="countdown-num" id="countdown-num">47</div>
-          <div class="countdown-label">days until OPT application window closes</div>
-        </div>
-        <div class="timeline-bar"><div class="timeline-fill" id="timeline-fill"></div></div>
-        <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--text3);margin-bottom:1rem">
-          <span>Program Start: Aug 2023</span><span>OPT Deadline: Jun 15</span>
-        </div>
-        <div class="timeline-steps">
-          <div class="step-item"><div class="step-dot step-done">✓</div><div class="step-text">Enrolled & I-20 issued <span>Completed Aug 2023</span></div></div>
-          <div class="step-item"><div class="step-dot step-done">✓</div><div class="step-text">Completed 9 months enrollment <span>Completed Dec 2024</span></div></div>
-          <div class="step-item"><div class="step-dot step-active">→</div><div class="step-text"><strong>File OPT I-765 Application</strong> <span>⚠️ File 90 days before graduation</span></div></div>
-          <div class="step-item"><div class="step-dot step-todo">4</div><div class="step-text">Receive EAD Card <span>Processing: 3–5 months</span></div></div>
-          <div class="step-item"><div class="step-dot step-todo">5</div><div class="step-text">Begin OPT Employment <span>Must start within 60 days of graduation</span></div></div>
-        </div>
-        <div style="margin-top:1.25rem;display:flex;gap:8px">
-          <button class="btn-sm btn-sm-primary">📥 Download I-765 Checklist</button>
-          <button class="btn-sm" onclick="showPage('mentors')">🧑‍🏫 Ask a Mentor</button>
-        </div>
-      </div>
-
-      <!-- Stats -->
-      <div class="stat-row">
-        <div class="stat-card"><div class="num" style="background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent">82</div><div class="lbl">CPT Days Used</div></div>
-        <div class="stat-card"><div class="num" style="color:var(--green)">3</div><div class="lbl">Mentors Trusted You</div></div>
-        <div class="stat-card"><div class="num" style="color:var(--gold)">12</div><div class="lbl">Community Answers</div></div>
-      </div>
-
-      <!-- Alerts -->
-      <div class="card">
-        <div class="card-title">🔔 Your Alerts</div>
-        <div class="alert alert-warn"><span class="alert-icon">⚠️</span><div><strong>OPT Application Window</strong> — You have 47 days to submit your OPT I-765. Don't miss this deadline.</div></div>
-        <div class="alert alert-info"><span class="alert-icon">ℹ️</span><div><strong>CPT Usage</strong> — You've used 82 days of CPT. Using 365+ days may affect OPT eligibility.</div></div>
-        <div class="alert alert-info"><span class="alert-icon">✈️</span><div><strong>Travel Group Found</strong> — 2 students traveling Kenya → IU in August. <a href="#" onclick="showPage('travel')" style="color:var(--cyan2)">View group →</a></div></div>
-      </div>
-
-      <!-- Quick Actions -->
-      <div class="card">
-        <div class="card-title">⚡ Quick Actions</div>
-        <div class="quick-actions">
-          <button class="qa-btn" onclick="showPage('mentors')">
-            <span class="icon">🧑‍🏫</span>
-            <div class="label">Book a Mentor</div>
-            <div class="sub">OPT, CPT, Career help</div>
-          </button>
-          <button class="qa-btn" onclick="showPage('community')">
-            <span class="icon">💬</span>
-            <div class="label">Ask Community</div>
-            <div class="sub">Get peer answers</div>
-          </button>
-          <button class="qa-btn" onclick="showPage('travel')">
-            <span class="icon">✈️</span>
-            <div class="label">Find Travel Group</div>
-            <div class="sub">Kenya → USA</div>
-          </button>
-          <button class="qa-btn" onclick="showPage('thinklab')">
-            <span class="icon">💡</span>
-            <div class="label">Submit an Idea</div>
-            <div class="sub">Think Lab</div>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <div class="dash-sidebar">
-      <!-- Recommended Mentors -->
-      <div class="card">
-        <div class="card-title">🧑‍🏫 Matched Mentors</div>
-        <div class="mentor-list">
-          <div class="mentor-item">
-            <div class="mentor-avatar">JN</div>
-            <div class="mentor-info">
-              <h4>James Njoroge</h4>
-              <p>Google SWE · OPT Specialist</p>
-              <div class="mentor-rating">★★★★★ 4.9</div>
+          <section class="panel timeline-panel">
+            <div class="panel-title">Your Visa Timeline</div>
+            <div class="countdown">
+              <strong id="countdown-num">--</strong>
+              <span id="countdown-label">days until OPT application window closes</span>
             </div>
-            <button class="btn-sm btn-sm-primary" onclick="showPage('mentors')">Ask</button>
-          </div>
-          <div class="mentor-item">
-            <div class="mentor-avatar" style="background:var(--grad3)">SM</div>
-            <div class="mentor-info">
-              <h4>Sarah Mwangi</h4>
-              <p>IU Alumni · Health Informatics</p>
-              <div class="mentor-rating">★★★★★ 4.8</div>
+            <div class="progress"><span id="timeline-fill"></span></div>
+            <div class="timeline-meta">
+              <span id="program-start">Program Start: Aug 2023</span>
+              <span id="opt-deadline">OPT Deadline: --</span>
             </div>
-            <button class="btn-sm" onclick="showPage('mentors')">Ask</button>
-          </div>
-          <div class="mentor-item">
-            <div class="mentor-avatar" style="background:linear-gradient(135deg,#10B981,#00B4D8)">AO</div>
-            <div class="mentor-info">
-              <h4>Amara Osei</h4>
-              <p>Purdue · Immigration Expert</p>
-              <div class="mentor-rating">★★★★☆ 4.7</div>
+            <div class="timeline-steps" id="timeline-steps"></div>
+            <div class="actions-row">
+              <button class="btn small primary" id="download-checklist">Download I-765 Checklist</button>
+              <button class="btn small secondary" data-page="mentors">Ask a Mentor</button>
             </div>
-            <button class="btn-sm" onclick="showPage('mentors')">Ask</button>
-          </div>
+          </section>
+
+          <section class="metric-row">
+            <article class="metric"><strong>82</strong><span>CPT Days Used</span></article>
+            <article class="metric"><strong>3</strong><span>Mentors Trusted You</span></article>
+            <article class="metric"><strong>12</strong><span>Community Answers</span></article>
+          </section>
+
+          <section class="panel">
+            <div class="panel-title">Your Alerts</div>
+            <div id="alerts"></div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-title">Quick Actions</div>
+            <div class="quick-actions" id="quick-actions"></div>
+          </section>
         </div>
-        <button class="btn-sm" style="width:100%;margin-top:1rem;text-align:center" onclick="showPage('mentors')">View All Mentors →</button>
-      </div>
 
-      <!-- Trusted by -->
-      <div class="card" style="background:linear-gradient(135deg,rgba(124,58,237,0.1),rgba(21,101,192,0.08));border-color:rgba(124,58,237,0.2)">
-        <div class="card-title">🏅 Your Trust Profile</div>
-        <div style="text-align:center;padding:1rem 0">
-          <div style="font-size:2.5rem;font-weight:800;font-family:'Syne',sans-serif;color:var(--purple2)">3</div>
-          <div style="font-size:13px;color:var(--text3);margin-top:4px">Mentors trust you</div>
-          <div style="display:flex;justify-content:center;gap:-6px;margin-top:12px">
-            <div class="member-ava ma1" style="margin-left:0">J</div>
-            <div class="member-ava ma2">S</div>
-            <div class="member-ava ma3">A</div>
-          </div>
+        <aside class="stack">
+          <section class="panel">
+            <div class="panel-title">Matched Mentors</div>
+            <div class="mini-list" id="matched-mentors"></div>
+            <button class="btn small secondary full" data-page="mentors">View All Mentors</button>
+          </section>
+          <section class="panel trust-panel">
+            <div class="panel-title">Trust Profile</div>
+            <strong>3</strong>
+            <span>Mentors trust you</span>
+            <div class="trust-bars">
+              <label>Reliability <span style="--w:90%"></span></label>
+              <label>Helpfulness <span style="--w:75%"></span></label>
+              <label>Engagement <span style="--w:60%"></span></label>
+            </div>
+          </section>
+          <section class="panel">
+            <div class="panel-title">Recent Activity</div>
+            <div class="activity-list" id="activity-list"></div>
+          </section>
+        </aside>
+      </div>
+    </section>
+
+    <section id="page-mentors" class="page shell">
+      <header class="page-header">
+        <h2>Find Your Mentor</h2>
+        <p>Filter verified mentors by country, field, visa topic, and price type.</p>
+      </header>
+      <div class="toolbar">
+        <input id="mentor-search" class="search" type="search" placeholder="Search mentors, tags, country...">
+        <div class="chips" id="mentor-filters"></div>
+      </div>
+      <div class="card-grid" id="mentors-grid"></div>
+    </section>
+
+    <section id="page-community" class="page shell narrow">
+      <header class="page-header">
+        <h2>Community Q&amp;A</h2>
+        <p>Questions and answers from students who are already in the journey.</p>
+      </header>
+      <form class="composer" id="post-form">
+        <textarea id="post-body" placeholder="Ask about OPT, housing, jobs, life in the US..."></textarea>
+        <div class="composer-footer">
+          <select id="post-topic">
+            <option>OPT/CPT</option>
+            <option>Arrival</option>
+            <option>Jobs</option>
+            <option>Housing</option>
+            <option>Life Tips</option>
+          </select>
+          <button class="btn small primary" type="submit">Post Question</button>
         </div>
-        <div style="display:flex;flex-direction:column;gap:8px;font-size:13px;margin-top:1rem">
-          <div style="display:flex;justify-content:space-between"><span style="color:var(--text3)">Reliability</span><div style="width:100px;height:6px;background:var(--surface2);border-radius:3px;margin-left:auto"><div style="width:90%;height:100%;background:var(--grad);border-radius:3px"></div></div></div>
-          <div style="display:flex;justify-content:space-between"><span style="color:var(--text3)">Helpfulness</span><div style="width:100px;height:6px;background:var(--surface2);border-radius:3px;margin-left:auto"><div style="width:75%;height:100%;background:var(--grad2);border-radius:3px"></div></div></div>
-          <div style="display:flex;justify-content:space-between"><span style="color:var(--text3)">Engagement</span><div style="width:100px;height:6px;background:var(--surface2);border-radius:3px;margin-left:auto"><div style="width:60%;height:100%;background:linear-gradient(135deg,var(--green),var(--cyan));border-radius:3px"></div></div></div>
-        </div>
-      </div>
+      </form>
+      <div class="chips" id="post-filters"></div>
+      <div class="posts" id="posts"></div>
+    </section>
 
-      <!-- Recent Activity -->
-      <div class="card">
-        <div class="card-title">🕐 Recent Activity</div>
-        <div style="display:flex;flex-direction:column;gap:12px;font-size:13px">
-          <div style="display:flex;gap:10px;align-items:flex-start"><div style="width:6px;height:6px;background:var(--green);border-radius:50%;margin-top:5px;flex-shrink:0"></div><div><div>Answered a community question about OPT timeline</div><div style="color:var(--text3);font-size:12px;margin-top:2px">2 hours ago</div></div></div>
-          <div style="display:flex;gap:10px;align-items:flex-start"><div style="width:6px;height:6px;background:var(--blue);border-radius:50%;margin-top:5px;flex-shrink:0"></div><div><div>Session with mentor James Njoroge</div><div style="color:var(--text3);font-size:12px;margin-top:2px">Yesterday</div></div></div>
-          <div style="display:flex;gap:10px;align-items:flex-start"><div style="width:6px;height:6px;background:var(--purple2);border-radius:50%;margin-top:5px;flex-shrink:0"></div><div><div>Idea validated in Think Lab</div><div style="color:var(--text3);font-size:12px;margin-top:2px">3 days ago</div></div></div>
-          <div style="display:flex;gap:10px;align-items:flex-start"><div style="width:6px;height:6px;background:var(--gold);border-radius:50%;margin-top:5px;flex-shrink:0"></div><div><div>Joined Kenya → IU travel group</div><div style="color:var(--text3);font-size:12px;margin-top:2px">1 week ago</div></div></div>
-        </div>
+    <section id="page-profiles" class="page shell profile-shell">
+      <header class="page-header">
+        <h2>Student &amp; Mentor Profiles</h2>
+        <p>Professional profiles that show skills, education, qualifications, trust signals, and activity.</p>
+      </header>
+      <div class="toolbar">
+        <input id="profile-search" class="search" type="search" placeholder="Search people, skills, schools...">
+        <div class="chips" id="profile-filters"></div>
       </div>
-    </div>
-  </div>
-</div>
+      <div class="profile-layout">
+        <aside class="profile-directory panel" id="profile-directory"></aside>
+        <article class="profile-detail" id="profile-detail"></article>
+      </div>
+    </section>
 
-<!-- ===== MENTORS PAGE ===== -->
-<div id="page-mentors" class="page">
-  <div class="page-header">
-    <h2>Find Your Mentor</h2>
-    <p>Connect with people who've already walked your path — same school, same visa, same goals.</p>
-  </div>
-  <div class="filters">
-    <button class="filter-chip active">All</button>
-    <button class="filter-chip">OPT / CPT</button>
-    <button class="filter-chip">Career</button>
-    <button class="filter-chip">Health Informatics</button>
-    <button class="filter-chip">Computer Science</button>
-    <button class="filter-chip">Free</button>
-    <button class="filter-chip">Kenya 🇰🇪</button>
-    <button class="filter-chip">Nigeria 🇳🇬</button>
-    <button class="filter-chip">India 🇮🇳</button>
-  </div>
-  <div class="mentors-grid">
-    <!-- Mentor 1 -->
-    <div class="mentor-card">
-      <div class="mentor-card-header">
-        <div class="mentor-card-avatar mc-av1">JN</div>
-        <div class="mentor-card-info">
-          <h3>James Njoroge</h3>
-          <p>🇰🇪 Kenya · Google SWE, Seattle</p>
-          <div class="stars">★★★★★ 4.9 (42 reviews)</div>
-          <span class="verified">✓ Verified Alumni</span>
-        </div>
-      </div>
-      <div class="tags">
-        <span class="tag">OPT Expert</span><span class="tag">H-1B Journey</span><span class="tag">Software Eng.</span><span class="tag">IU Alumni</span>
-      </div>
-      <div class="trusted-by">Trusted by: <span class="trust-pill">28 students</span></div>
-      <div style="font-size:13px;color:var(--text3);margin-bottom:1rem;line-height:1.6">Helped 40+ students navigate OPT and land roles at top tech companies. Specializes in F-1 → H-1B transitions.</div>
-      <div class="mentor-card-actions">
-        <button class="btn-sm btn-sm-primary">📅 Book Session — $30/hr</button>
-        <button class="btn-sm">💬 Free Chat</button>
-      </div>
-    </div>
-    <!-- Mentor 2 -->
-    <div class="mentor-card">
-      <div class="mentor-card-header">
-        <div class="mentor-card-avatar mc-av2">SM</div>
-        <div class="mentor-card-info">
-          <h3>Sarah Mwangi</h3>
-          <p>🇰🇪 Kenya · Health Analytics, Chicago</p>
-          <div class="stars">★★★★★ 4.8 (31 reviews)</div>
-          <span class="verified">✓ Verified Alumni</span>
-        </div>
-      </div>
-      <div class="tags">
-        <span class="tag">Health Informatics</span><span class="tag">OPT</span><span class="tag">IU Alumni</span>
-      </div>
-      <div class="trusted-by">Trusted by: <span class="trust-pill">18 students</span></div>
-      <div style="font-size:13px;color:var(--text3);margin-bottom:1rem;line-height:1.6">IU Health Informatics grad. Now works in healthcare analytics. Perfect match if you're in the same field.</div>
-      <div class="mentor-card-actions">
-        <button class="btn-sm btn-sm-primary">📅 Book — $25/hr</button>
-        <button class="btn-sm">💬 Free Chat</button>
-      </div>
-    </div>
-    <!-- Mentor 3 -->
-    <div class="mentor-card">
-      <div class="mentor-card-header">
-        <div class="mentor-card-avatar mc-av3">AO</div>
-        <div class="mentor-card-info">
-          <h3>Amara Osei</h3>
-          <p>🇬🇭 Ghana · Immigration Consultant</p>
-          <div class="stars">★★★★☆ 4.7 (19 reviews)</div>
-          <span class="verified">✓ Verified</span>
-        </div>
-      </div>
-      <div class="tags">
-        <span class="tag">Immigration</span><span class="tag">CPT</span><span class="tag">OPT</span><span class="tag">GRE Prep</span>
-      </div>
-      <div class="trusted-by">Trusted by: <span class="trust-pill">12 students</span></div>
-      <div style="font-size:13px;color:var(--text3);margin-bottom:1rem;line-height:1.6">Immigration specialist who helps African students navigate complex visa situations. Free first consultation.</div>
-      <div class="mentor-card-actions">
-        <button class="btn-sm btn-sm-primary">📅 Book — $20/hr</button>
-        <button class="btn-sm">💬 Free First Call</button>
-      </div>
-    </div>
-    <!-- Mentor 4 -->
-    <div class="mentor-card">
-      <div class="mentor-card-header">
-        <div class="mentor-card-avatar mc-av4">RK</div>
-        <div class="mentor-card-info">
-          <h3>Raj Kumar</h3>
-          <p>🇮🇳 India · Data Science Lead, NYC</p>
-          <div class="stars">★★★★★ 5.0 (56 reviews)</div>
-          <span class="verified">✓ Top Mentor</span>
-        </div>
-      </div>
-      <div class="tags">
-        <span class="tag">Data Science</span><span class="tag">STEM OPT</span><span class="tag">H-1B</span><span class="tag">Interviews</span>
-      </div>
-      <div class="trusted-by">Trusted by: <span class="trust-pill">51 students</span></div>
-      <div style="font-size:13px;color:var(--text3);margin-bottom:1rem;line-height:1.6">Top-rated mentor. Specializes in STEM OPT extension and data science interview prep. 100+ students placed.</div>
-      <div class="mentor-card-actions">
-        <button class="btn-sm btn-sm-primary">📅 Book — $50/hr</button>
-        <button class="btn-sm">💬 Message</button>
-      </div>
-    </div>
-    <!-- Mentor 5 - Lecturer in Kenya -->
-    <div class="mentor-card">
-      <div class="mentor-card-header">
-        <div class="mentor-card-avatar mc-av5">PW</div>
-        <div class="mentor-card-info">
-          <h3>Prof. Peter Waweru</h3>
-          <p>🇰🇪 Kenya · UoN Lecturer · Not migrating</p>
-          <div class="stars">★★★★★ 4.9 (24 reviews)</div>
-          <span class="verified">✓ Educator</span>
-        </div>
-      </div>
-      <div class="tags">
-        <span class="tag">Application Guidance</span><span class="tag">Research</span><span class="tag">GRE</span><span class="tag">Free</span>
-      </div>
-      <div class="trusted-by">Trusted by: <span class="trust-pill">24 students</span></div>
-      <div style="font-size:13px;color:var(--text3);margin-bottom:1rem;line-height:1.6">UoN lecturer guiding students through applications, research proposals, and the transition from Kenya to abroad. Offers free sessions.</div>
-      <div class="mentor-card-actions">
-        <button class="btn-sm btn-sm-primary" style="background:var(--green);background-image:none">🎓 Free Mentorship</button>
-        <button class="btn-sm">💬 Message</button>
-      </div>
-    </div>
-    <!-- Mentor 6 -->
-    <div class="mentor-card">
-      <div class="mentor-card-header">
-        <div class="mentor-card-avatar mc-av6">LN</div>
-        <div class="mentor-card-info">
-          <h3>Lila Nguyen</h3>
-          <p>🇻🇳 Vietnam · Product Manager, Austin</p>
-          <div class="stars">★★★★☆ 4.6 (14 reviews)</div>
-          <span class="verified">✓ Verified</span>
-        </div>
-      </div>
-      <div class="tags">
-        <span class="tag">Product</span><span class="tag">CPT</span><span class="tag">Career Switch</span>
-      </div>
-      <div class="trusted-by">Trusted by: <span class="trust-pill">9 students</span></div>
-      <div style="font-size:13px;color:var(--text3);margin-bottom:1rem;line-height:1.6">Transitioned from engineering to PM role on CPT. Helps students find non-traditional career paths while maintaining status.</div>
-      <div class="mentor-card-actions">
-        <button class="btn-sm btn-sm-primary">📅 Book — $35/hr</button>
-        <button class="btn-sm">💬 Free Chat</button>
-      </div>
-    </div>
-  </div>
-</div>
+    <section id="page-profile-dashboard" class="page shell profile-dashboard-shell">
+      <header class="page-header">
+        <button class="btn small secondary" data-page="profiles">Back to Profiles</button>
+        <h2 id="profile-dashboard-title">Profile Dashboard</h2>
+        <p id="profile-dashboard-subtitle">A dedicated workspace for this profile.</p>
+      </header>
+      <div id="profile-dashboard-content"></div>
+    </section>
 
-<!-- ===== COMMUNITY PAGE ===== -->
-<div id="page-community" class="page">
-  <div class="page-header">
-    <h2>Community Q&A</h2>
-    <p>Real questions, real answers from students who've been there.</p>
+    <section id="page-travel" class="page shell">
+      <header class="page-header">
+        <h2>Group Travel Matching</h2>
+        <p>Find students traveling from your country to your university and coordinate arrival together.</p>
+      </header>
+      <form class="finder" id="travel-form">
+        <label>From Country<input id="travel-country" list="african-countries" placeholder="Search African country"></label>
+        <label>To University<input id="travel-university" list="us-universities" placeholder="Search any US university"></label>
+        <label>Travel Date<input id="travel-date" type="date"></label>
+        <label>Intake<select id="travel-intake"><option>Fall 2025</option><option>Spring 2026</option><option>Fall 2026</option></select></label>
+        <button class="btn primary" type="submit">Find Groups</button>
+      </form>
+      <div class="card-grid" id="travel-groups"></div>
+    </section>
+
+    <section id="page-thinklab" class="page shell">
+      <header class="page-header">
+        <h2>Think Lab</h2>
+        <p>Post ideas, get validation, and find collaborators.</p>
+      </header>
+      <div class="toolbar">
+        <button class="btn primary" id="submit-idea">Submit Idea</button>
+        <div class="chips" id="idea-filters"></div>
+      </div>
+      <div class="card-grid" id="ideas-grid"></div>
+    </section>
+
+    <section id="page-arrival" class="page shell">
+      <header class="page-header">
+        <h2>Arrival &amp; Hospitality</h2>
+        <p>Your first week checklist plus curated student services.</p>
+      </header>
+      <section class="panel arrival-checklist">
+        <div class="panel-title">Your Arrival Checklist</div>
+        <div class="checklist" id="arrival-checklist"></div>
+      </section>
+      <div class="chips tabs" id="arrival-tabs"></div>
+      <div class="card-grid" id="arrival-services"></div>
+    </section>
+  </main>
+
+  <div class="modal" id="profile-modal" aria-hidden="true">
+    <form class="modal-panel" id="profile-form">
+      <button type="button" class="icon-btn" id="close-profile" aria-label="Close">×</button>
+      <h2>Set Up Your Profile</h2>
+      <p>This personalizes your timeline, mentor matches, and travel groups.</p>
+      <label>Your Name<input name="name" type="text" placeholder="Fredrick Kamau" required></label>
+      <div class="split">
+        <label>Country<input name="country" type="text" list="african-countries" placeholder="Search African country"></label>
+        <label>Status<select name="status"><option>Current F-1 Student</option><option>Student Arriving</option><option>Mentor / Alumni</option><option>Lecturer / Educator</option></select></label>
+      </div>
+      <label>University<input name="university" type="text" list="us-universities" placeholder="Indiana University Bloomington"></label>
+      <div class="split">
+        <label>Program Start<input name="programStart" type="month" value="2023-08"></label>
+        <label>Graduation Date<input name="graduation" type="month" value="2025-05"></label>
+      </div>
+      <label>Field of Study<select name="field"><option>Health Informatics</option><option>Computer Science</option><option>Data Science</option><option>Business</option><option>Engineering</option></select></label>
+      <button class="btn primary full" type="submit">Go to My Dashboard</button>
+    </form>
   </div>
 
-  <div class="post-form">
-    <textarea placeholder="Ask the community a question about OPT, housing, jobs, life in the US..."></textarea>
-    <div class="post-form-footer">
-      <div class="topic-pills">
-        <span class="topic-pill sel">OPT/CPT</span>
-        <span class="topic-pill">Arrival</span>
-        <span class="topic-pill">Jobs</span>
-        <span class="topic-pill">Housing</span>
-        <span class="topic-pill">Life Tips</span>
-      </div>
-      <button class="btn-sm btn-sm-primary">Post Question →</button>
-    </div>
-  </div>
+  <datalist id="us-universities"></datalist>
+  <datalist id="african-countries"></datalist>
 
-  <div class="filters" style="margin-bottom:1.5rem">
-    <button class="filter-chip active">All Topics</button>
-    <button class="filter-chip">OPT/CPT</button>
-    <button class="filter-chip">Arrival</button>
-    <button class="filter-chip">Jobs</button>
-    <button class="filter-chip">Housing</button>
-    <button class="filter-chip">Kenya 🇰🇪</button>
-    <button class="filter-chip">IU</button>
-  </div>
-
-  <div class="posts">
-    <div class="post-card">
-      <div class="post-meta">
-        <div class="post-avatar" style="background:linear-gradient(135deg,#1565C0,#00B4D8)">MK</div>
-        <span class="post-author">Mercy Kamau</span>
-        <span class="post-tag pt-opt">OPT</span>
-        <span class="post-time">2h ago</span>
-      </div>
-      <div class="post-q">How early should I file my OPT application before graduation?</div>
-      <div class="post-body">I graduate in May 2025 and I'm confused about when exactly to submit my I-765. My DSO said 90 days before, but I've also read 150 days online. What's the actual rule?</div>
-      <div class="post-footer">
-        <span class="post-action">💬 14 answers</span>
-        <span class="post-action">👍 23 helpful</span>
-        <span class="post-action">🔖 Save</span>
-        <span class="post-action" style="color:var(--cyan2)">✓ Answered by mentor</span>
-      </div>
-    </div>
-
-    <div class="post-card">
-      <div class="post-meta">
-        <div class="post-avatar" style="background:linear-gradient(135deg,#7C3AED,#1565C0)">DM</div>
-        <span class="post-author">Daniel Mwenda</span>
-        <span class="post-tag pt-arr">Arrival</span>
-        <span class="post-time">5h ago</span>
-      </div>
-      <div class="post-q">Best SIM card to get when you land at Indianapolis airport?</div>
-      <div class="post-body">Arriving at IND airport in August. What SIM card should I get right at the airport vs waiting to go to a carrier store? On a tight budget.</div>
-      <div class="post-footer">
-        <span class="post-action">💬 8 answers</span>
-        <span class="post-action">👍 15 helpful</span>
-        <span class="post-action">🔖 Save</span>
-      </div>
-    </div>
-
-    <div class="post-card">
-      <div class="post-meta">
-        <div class="post-avatar" style="background:linear-gradient(135deg,#10B981,#00B4D8)">AN</div>
-        <span class="post-author">Aisha Ndungu</span>
-        <span class="post-tag pt-job">Jobs</span>
-        <span class="post-time">Yesterday</span>
-      </div>
-      <div class="post-q">Which companies are known to sponsor H-1B for African international students?</div>
-      <div class="post-body">I'm an F-1 student in data analytics. I want to start applying for full-time roles but only to companies that actually sponsor. Anyone have a reliable list or experience?</div>
-      <div class="post-footer">
-        <span class="post-action">💬 31 answers</span>
-        <span class="post-action">👍 87 helpful</span>
-        <span class="post-action">🔖 Save</span>
-        <span class="post-action" style="color:var(--cyan2)">✓ Pinned by mentor</span>
-      </div>
-    </div>
-
-    <div class="post-card">
-      <div class="post-meta">
-        <div class="post-avatar" style="background:linear-gradient(135deg,#F59E0B,#F97316)">JO</div>
-        <span class="post-author">Joyce Oloo</span>
-        <span class="post-tag pt-hou">Housing</span>
-        <span class="post-time">2 days ago</span>
-      </div>
-      <div class="post-q">Affordable housing near IU Bloomington for a grad student — recommendations?</div>
-      <div class="post-body">Looking for a 1-bed or shared apartment within walking/biking distance of IU campus. Budget is $600/month max. Any neighborhoods or specific complexes you'd recommend?</div>
-      <div class="post-footer">
-        <span class="post-action">💬 19 answers</span>
-        <span class="post-action">👍 44 helpful</span>
-        <span class="post-action">🔖 Save</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ===== TRAVEL PAGE ===== -->
-<div id="page-travel" class="page">
-  <div class="travel-hero">
-    <div class="travel-hero-icon">✈️</div>
-    <div>
-      <h2>Group Travel Matching</h2>
-      <p>Find students flying from the same country to your university. Travel together, share costs, arrive with friends — not as a stranger alone.</p>
-    </div>
-  </div>
-
-  <div class="travel-form">
-    <div style="font-size:14px;font-weight:600;margin-bottom:1rem;color:var(--text2)">Find or create a travel group</div>
-    <div class="form-row">
-      <div class="form-group">
-        <label>From Country</label>
-        <select><option>Kenya 🇰🇪</option><option>Nigeria 🇳🇬</option><option>Ghana 🇬🇭</option><option>India 🇮🇳</option><option>China 🇨🇳</option><option>Ethiopia 🇪🇹</option></select>
-      </div>
-      <div class="form-group">
-        <label>To University</label>
-        <select><option>Indiana University</option><option>Purdue University</option><option>UIUC</option><option>Ohio State</option><option>Michigan State</option></select>
-      </div>
-      <div class="form-group">
-        <label>Travel Date</label>
-        <input type="date" value="2025-08-10">
-      </div>
-      <div class="form-group">
-        <label>Intake</label>
-        <select><option>Fall 2025</option><option>Spring 2026</option><option>Fall 2026</option></select>
-      </div>
-    </div>
-    <div style="display:flex;gap:8px">
-      <button class="btn-primary" style="font-size:14px;padding:10px 24px">🔍 Find Groups</button>
-      <button class="btn-secondary" style="font-size:14px;padding:10px 24px">➕ Create Group</button>
-    </div>
-  </div>
-
-  <div style="margin-bottom:1.5rem">
-    <div style="font-size:18px;font-weight:700;margin-bottom:4px">Active Travel Groups</div>
-    <div style="font-size:14px;color:var(--text3)">Students organizing travel for Fall 2025 intake</div>
-  </div>
-
-  <div class="groups-grid">
-    <div class="group-card">
-      <div class="group-route">
-        <span class="route-flag">🇰🇪</span>
-        <span class="route-arrow">→</span>
-        <div class="route-info"><h4>Kenya → Indiana University</h4><p>Nairobi (NBO) → Chicago (ORD) → Bloomington</p></div>
-      </div>
-      <div class="group-date">📅 August 10–12, 2025 · Fall Intake</div>
-      <div class="group-members">
-        <div class="member-ava ma1">M</div>
-        <div class="member-ava ma2">K</div>
-        <div class="member-ava ma3">J</div>
-        <span class="members-count">3 members · 2 spots left</span>
-      </div>
-      <div style="font-size:13px;color:var(--text3);margin-bottom:1rem;line-height:1.5">Flying Kenya Airways NBO→LHR→ORD. Planning to share Uber from Chicago to Bloomington (~2hr). Looking for 2 more!</div>
-      <div class="group-actions">
-        <button class="btn-sm btn-sm-primary">✈️ Join Group</button>
-        <button class="btn-sm">💬 Chat</button>
-      </div>
-    </div>
-
-    <div class="group-card">
-      <div class="group-route">
-        <span class="route-flag">🇳🇬</span>
-        <span class="route-arrow">→</span>
-        <div class="route-info"><h4>Nigeria → Purdue University</h4><p>Lagos (LOS) → New York (JFK) → West Lafayette</p></div>
-      </div>
-      <div class="group-date">📅 August 14–16, 2025 · Fall Intake</div>
-      <div class="group-members">
-        <div class="member-ava ma2">A</div>
-        <div class="member-ava ma4">T</div>
-        <span class="members-count">2 members · 3 spots left</span>
-      </div>
-      <div style="font-size:13px;color:var(--text3);margin-bottom:1rem;line-height:1.5">Flying through JFK, 1 night layover. Looking for others to split Airbnb in NYC and rent a car to Purdue.</div>
-      <div class="group-actions">
-        <button class="btn-sm btn-sm-primary">✈️ Join Group</button>
-        <button class="btn-sm">💬 Chat</button>
-      </div>
-    </div>
-
-    <div class="group-card">
-      <div class="group-route">
-        <span class="route-flag">🇬🇭</span>
-        <span class="route-arrow">→</span>
-        <div class="route-info"><h4>Ghana → Ohio State</h4><p>Accra (ACC) → Atlanta (ATL) → Columbus</p></div>
-      </div>
-      <div class="group-date">📅 August 8–9, 2025 · Fall Intake</div>
-      <div class="group-members">
-        <div class="member-ava ma3">E</div>
-        <div class="member-ava ma1">K</div>
-        <div class="member-ava ma2">S</div>
-        <div class="member-ava ma4">O</div>
-        <span class="members-count">4 members · 1 spot left</span>
-      </div>
-      <div style="font-size:13px;color:var(--text3);margin-bottom:1rem;line-height:1.5">Almost full! One more person for the shuttle from Atlanta to Columbus. Last spot available.</div>
-      <div class="group-actions">
-        <button class="btn-sm btn-sm-primary">✈️ Last Spot!</button>
-        <button class="btn-sm">💬 Chat</button>
-      </div>
-    </div>
-
-    <div class="group-card" style="border:1px dashed var(--border2);background:rgba(21,101,192,0.03)">
-      <div style="text-align:center;padding:2rem;color:var(--text3)">
-        <div style="font-size:3rem;margin-bottom:1rem">➕</div>
-        <div style="font-size:15px;font-weight:600;margin-bottom:8px;color:var(--text2)">Create a Travel Group</div>
-        <div style="font-size:13px;margin-bottom:1.5rem">Don't see your route? Start your own group and invite fellow students.</div>
-        <button class="btn-sm btn-sm-primary">Create Group →</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ===== THINK LAB PAGE ===== -->
-<div id="page-thinklab" class="page">
-  <div class="page-header">
-    <h2>💡 Think Lab</h2>
-    <p>Post ideas, get mentor validation, find collaborators. Turn your thinking into something real.</p>
-  </div>
-  <div style="display:flex;gap:8px;margin-bottom:2rem">
-    <button class="btn-primary" style="font-size:14px;padding:10px 24px">➕ Submit Idea</button>
-    <button class="filter-chip active">All Ideas</button>
-    <button class="filter-chip">AI / Tech</button>
-    <button class="filter-chip">Health</button>
-    <button class="filter-chip">Fintech</button>
-    <button class="filter-chip">Social Impact</button>
-    <button class="filter-chip">Validated ✓</button>
-  </div>
-
-  <div class="ideas-grid">
-    <div class="idea-card">
-      <div class="idea-cat ic-health">🏥 Health Tech</div>
-      <h3>AI-powered GI Cancer Early Detection using Biomarkers</h3>
-      <p>Using ML models trained on clinical biomarker data to predict GI cancer risk 1 year in advance. Built with Python + XGBoost. Targeting low-resource clinical settings in Kenya.</p>
-      <div class="validation">
-        <span class="val-icon">✓</span>
-        <span class="val-text">Validated by</span>
-        <span class="val-count">3 mentors</span>
-        <span class="trust-pill" style="margin-left:auto">Promising</span>
-      </div>
-      <div class="idea-author">
-        <div class="idea-ava">FK</div>
-        <div class="idea-author-info"><strong>Fredrick K.</strong> · IU Health Informatics</div>
-        <div class="idea-actions">
-          <button class="btn-sm">🤝 Collab</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="idea-card">
-      <div class="idea-cat ic-ai">🤖 AI / Tech</div>
-      <h3>International Student OS — F1Flow (this platform!)</h3>
-      <p>A unified platform connecting F-1 students across the entire lifecycle: visa guidance, mentorship, travel matching, arrival support, community, and innovation (Think Lab).</p>
-      <div class="validation">
-        <span class="val-icon">✓</span>
-        <span class="val-text">Validated by</span>
-        <span class="val-count">5 mentors</span>
-        <span class="trust-pill" style="margin-left:auto">Scalable</span>
-      </div>
-      <div class="idea-author">
-        <div class="idea-ava">FK</div>
-        <div class="idea-author-info"><strong>Fredrick K.</strong> · IU Health Informatics</div>
-        <div class="idea-actions">
-          <button class="btn-sm">🤝 Collab</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="idea-card">
-      <div class="idea-cat ic-fintech">💰 Fintech</div>
-      <h3>Credit Score Builder App for F-1 Students</h3>
-      <p>Most international students arrive with zero US credit history. This app guides them through secured cards, credit-builder loans, and tracks their score over time with actionable tips.</p>
-      <div class="validation">
-        <span class="val-icon">✓</span>
-        <span class="val-text">Validated by</span>
-        <span class="val-count">2 mentors</span>
-        <span class="trust-pill" style="margin-left:auto">Needs MVP</span>
-      </div>
-      <div class="idea-author">
-        <div class="idea-ava" style="background:linear-gradient(135deg,#7C3AED,#1565C0)">AM</div>
-        <div class="idea-author-info"><strong>Amara M.</strong> · Purdue Finance</div>
-        <div class="idea-actions">
-          <button class="btn-sm">🤝 Collab</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="idea-card">
-      <div class="idea-cat ic-social">🌍 Social Impact</div>
-      <h3>Diaspora Mentorship Network for African Students</h3>
-      <p>Connecting African professionals in the diaspora with students back home who aspire to study abroad. Structured mentorship, application help, and cultural bridging.</p>
-      <div class="validation">
-        <span class="val-icon">✓</span>
-        <span class="val-text">Validated by</span>
-        <span class="val-count">4 mentors</span>
-        <span class="trust-pill" style="margin-left:auto">High Impact</span>
-      </div>
-      <div class="idea-author">
-        <div class="idea-ava" style="background:linear-gradient(135deg,#10B981,#00B4D8)">TO</div>
-        <div class="idea-author-info"><strong>Temi O.</strong> · Ohio State Econ</div>
-        <div class="idea-actions">
-          <button class="btn-sm">🤝 Collab</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="idea-card">
-      <div class="idea-cat ic-edu">🎓 Education</div>
-      <h3>Peer Tutoring Platform for International Students</h3>
-      <p>Many F-1 students struggle with US academic culture — writing style, class participation, exam format. A platform matching newly arrived students with experienced tutors.</p>
-      <div class="validation">
-        <span class="val-icon">•</span>
-        <span class="val-text">Awaiting validation</span>
-        <span class="val-count">0 mentors</span>
-        <button class="btn-sm" style="margin-left:auto;font-size:11px">Validate →</button>
-      </div>
-      <div class="idea-author">
-        <div class="idea-ava" style="background:linear-gradient(135deg,#F59E0B,#F97316)">LK</div>
-        <div class="idea-author-info"><strong>Lena K.</strong> · UIUC Education</div>
-        <div class="idea-actions">
-          <button class="btn-sm">🤝 Collab</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="idea-card" style="border:1px dashed var(--border2);background:rgba(124,58,237,0.03)">
-      <div style="text-align:center;padding:2rem;color:var(--text3)">
-        <div style="font-size:3rem;margin-bottom:1rem">💡</div>
-        <div style="font-size:15px;font-weight:600;margin-bottom:8px;color:var(--text2)">Share Your Idea</div>
-        <div style="font-size:13px;margin-bottom:1.5rem">Post a startup, research, or social impact idea. Get mentor feedback and find collaborators.</div>
-        <button class="btn-sm btn-sm-primary">Submit Idea →</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ===== HOSPITALITY PAGE ===== -->
-<div id="page-hospitality" class="page">
-  <div class="page-header">
-    <h2>🏠 Arrival & Hospitality</h2>
-    <p>Everything you need for your first week in the US — curated for international students.</p>
-  </div>
-
-  <div class="arrival-checklist">
-    <div class="checklist-title">✈️ Your Arrival Checklist</div>
-    <div class="checklist-grid">
-      <div class="check-item done" onclick="this.classList.toggle('done')"><div class="check-box">✓</div><span>Book temporary housing</span></div>
-      <div class="check-item done" onclick="this.classList.toggle('done')"><div class="check-box">✓</div><span>Airport pickup arranged</span></div>
-      <div class="check-item" onclick="this.classList.toggle('done')"><div class="check-box"></div><span>Get a SIM card</span></div>
-      <div class="check-item" onclick="this.classList.toggle('done')"><div class="check-box"></div><span>Open a bank account</span></div>
-      <div class="check-item" onclick="this.classList.toggle('done')"><div class="check-box"></div><span>Campus check-in & I-20</span></div>
-      <div class="check-item" onclick="this.classList.toggle('done')"><div class="check-box"></div><span>Get health insurance card</span></div>
-      <div class="check-item" onclick="this.classList.toggle('done')"><div class="check-box"></div><span>Apply for SSN (if eligible)</span></div>
-      <div class="check-item" onclick="this.classList.toggle('done')"><div class="check-box"></div><span>Get driver's license</span></div>
-    </div>
-  </div>
-
-  <div class="hosp-tabs">
-    <button class="hosp-tab active" onclick="setHospTab(this)">🏠 Housing</button>
-    <button class="hosp-tab" onclick="setHospTab(this)">🚗 Transport</button>
-    <button class="hosp-tab" onclick="setHospTab(this)">🍽️ Food & Grocery</button>
-    <button class="hosp-tab" onclick="setHospTab(this)">💳 Banking & SIM</button>
-    <button class="hosp-tab" onclick="setHospTab(this)">🏥 Healthcare</button>
-    <button class="hosp-tab" onclick="setHospTab(this)">🤝 Student Hosts</button>
-  </div>
-
-  <div class="hosp-grid">
-    <div class="hosp-card">
-      <div class="hosp-card-img hi-1">🏡</div>
-      <h4>IU Campus Living</h4>
-      <p>On-campus graduate housing, within walking distance of all facilities.</p>
-      <div class="hosp-meta"><span class="hosp-rating">★★★★☆</span><span class="hosp-dist">🏫 On campus</span><button class="btn-sm">View →</button></div>
-    </div>
-    <div class="hosp-card">
-      <div class="hosp-card-img hi-2">🛏️</div>
-      <h4>Graduate Apartments</h4>
-      <p>Affordable furnished studios near IU, popular with African students.</p>
-      <div class="hosp-meta"><span class="hosp-rating">★★★★★</span><span class="hosp-dist">🚶 0.5mi</span><button class="btn-sm">View →</button></div>
-    </div>
-    <div class="hosp-card">
-      <div class="hosp-card-img hi-3">🏠</div>
-      <h4>Student Sublets</h4>
-      <p>Short-term furnished rooms from current students leaving for summer.</p>
-      <div class="hosp-meta"><span class="hosp-rating">★★★★☆</span><span class="hosp-dist">🚶 0.3mi</span><button class="btn-sm">View →</button></div>
-    </div>
-    <div class="hosp-card">
-      <div class="hosp-card-img hi-4">🏘️</div>
-      <h4>Briscoe Quad</h4>
-      <p>Budget-friendly dorm option for graduate students. Meal plan available.</p>
-      <div class="hosp-meta"><span class="hosp-rating">★★★☆☆</span><span class="hosp-dist">🏫 On campus</span><button class="btn-sm">View →</button></div>
-    </div>
-    <div class="hosp-card">
-      <div class="hosp-card-img hi-5">🏢</div>
-      <h4>Eagleview Apartments</h4>
-      <p>1 and 2-bed units, 1 mile from campus. Popular with international students.</p>
-      <div class="hosp-meta"><span class="hosp-rating">★★★★☆</span><span class="hosp-dist">🚴 1mi</span><button class="btn-sm">View →</button></div>
-    </div>
-    <div class="hosp-card">
-      <div class="hosp-card-img hi-6">🤝</div>
-      <h4>Host a Student</h4>
-      <p>Current students offer temporary stays for new arrivals. Trusted & rated.</p>
-      <div class="hosp-meta"><span class="hosp-rating">★★★★★</span><span class="hosp-dist">💚 Community</span><button class="btn-sm">View →</button></div>
-    </div>
-  </div>
-</div>
-
-<!-- PROFILE MODAL -->
-<div class="profile-modal" id="profileModal" onclick="if(event.target===this)closeProfile()">
-  <div class="profile-modal-inner">
-    <button class="close-btn" onclick="closeProfile()">×</button>
-    <h3 style="font-size:20px;font-weight:700;margin-bottom:4px">Set Up Your Profile</h3>
-    <p style="font-size:13px;color:var(--text3);margin-bottom:1.5rem">This personalizes your timeline, mentor matches, and travel groups.</p>
-    <div style="display:flex;flex-direction:column;gap:1rem">
-      <div class="form-group">
-        <label class="form-label">Your Name</label>
-        <input type="text" placeholder="e.g. Fredrick Kamau" style="width:100%">
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
-        <div class="form-group">
-          <label class="form-label">Country of Origin</label>
-          <select style="width:100%"><option>Kenya 🇰🇪</option><option>Nigeria 🇳🇬</option><option>Ghana 🇬🇭</option><option>India 🇮🇳</option><option>Ethiopia 🇪🇹</option><option>Other</option></select>
-        </div>
-        <div class="form-group">
-          <label class="form-label">I Am A</label>
-          <select style="width:100%"><option>Student (Arriving)</option><option>Current F-1 Student</option><option>Mentor / Alumni</option><option>Lecturer / Educator</option></select>
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="form-label">University</label>
-        <input type="text" placeholder="Search your university..." style="width:100%">
-      </div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
-        <div class="form-group">
-          <label class="form-label">Program Start</label>
-          <input type="month" value="2023-08" style="width:100%">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Graduation Date</label>
-          <input type="month" value="2025-05" style="width:100%">
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="form-label">Field of Study</label>
-        <select style="width:100%"><option>Health Informatics</option><option>Computer Science</option><option>Data Science</option><option>Business</option><option>Engineering</option><option>Other</option></select>
-      </div>
-      <button class="btn-primary" style="width:100%;justify-content:center" onclick="closeProfile();showPage('dashboard')">🚀 Go to My Dashboard →</button>
-    </div>
-  </div>
-</div>
-
-<script>
-function showPage(id, btn) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.nav-link').forEach(b => b.classList.remove('active'));
-  document.getElementById('page-' + id).classList.add('active');
-  if (btn) btn.classList.add('active');
-  else {
-    const btns = document.querySelectorAll('.nav-link');
-    const map = {home:0,dashboard:1,mentors:2,community:3,travel:4,thinklab:5,hospitality:6};
-    if (map[id] !== undefined) btns[map[id]].classList.add('active');
-  }
-  window.scrollTo(0,0);
-}
-function openProfile() { document.getElementById('profileModal').classList.add('open'); }
-function closeProfile() { document.getElementById('profileModal').classList.remove('open'); }
-function setHospTab(el) {
-  document.querySelectorAll('.hosp-tab').forEach(t => t.classList.remove('active'));
-  el.classList.add('active');
-}
-// Filter chip toggle
-document.querySelectorAll('.filter-chip').forEach(chip => {
-  chip.addEventListener('click', function() {
-    this.closest('.filters').querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
-    this.classList.add('active');
-  });
-});
-// Animate countdown
-let days = 47;
-setInterval(() => {
-  const el = document.getElementById('countdown-num');
-  if (el) el.textContent = days;
-}, 100);
-</script>
+  <script src="app.js"></script>
 </body>
 </html>
