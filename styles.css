@@ -87,6 +87,7 @@ button{cursor:pointer}
 .nav-actions{
   display:flex;align-items:center;gap:10px; /* was: gap:12px */
   flex-shrink:0;                    /* NEW: theme switcher + Get Started never collapse */
+  flex-wrap:wrap;                   /* allows theme switcher to drop to second line if needed */
 }
 
 .nav-link,.nav-cta,.btn,.chip,.icon-btn,.theme-option{border:0;border-radius:999px;color:var(--text);transition:.18s ease}
@@ -215,8 +216,7 @@ button{cursor:pointer}
   .nav-links{order:3;flex:0 0 100%;width:100%;justify-content:flex-start;overflow:auto;padding-top:4px}
   .nav-link{padding:10px 12px 12px}
   .nav-actions{margin-left:auto}
-  /* Hide theme switcher at tablet — reduces clutter and frees right-side space */
-  .theme-switcher{display:none}
+  /* Hide theme switcher only at mobile where space is truly gone — 760px rule handles it */
   .page{padding-top:130px}
   .page.shell{padding-top:154px}
   .home-network{grid-template-columns:220px minmax(0,1fr)}
