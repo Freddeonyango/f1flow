@@ -38,12 +38,12 @@ button{cursor:pointer}
    ============================================================ */
 .topbar{
   position:fixed;inset:0 0 auto;z-index:50;min-height:64px;
-  padding:0 20px 0 16px;           /* was: padding:0 16px — added explicit right padding */
+  padding:0 24px 0 16px;           /* was: 20px right — bumped to 24px to clear Get Started */
   display:flex;align-items:center;
-  gap:10px;                         /* was: 14px — tighter to recover horizontal space */
+  gap:10px;
   background:var(--nav-bg);backdrop-filter:blur(18px);
   border-bottom:1px solid var(--line);
-  overflow:hidden;                  /* NEW: prevents any child from blowing out the bar */
+  overflow:hidden;
 }
 
 .brand{display:flex;align-items:center;gap:12px;background:transparent;border:0;color:var(--text);flex-shrink:0}
@@ -130,7 +130,7 @@ button{cursor:pointer}
 /* ============================================================
    HERO H1 — FIX 6: line-height 1.14 (was 1.08) for more breathing room
    ============================================================ */
-.social-post h1{font-size:clamp(30px,3.4vw,46px);line-height:1.14;max-width:780px} /* was: line-height:1.08 */
+.social-post h1{font-size:clamp(22px,2.2vw,36px);line-height:1.18;max-width:780px}
 
 .social-post p{color:var(--muted);line-height:1.6;font-size:16px}.social-reactions{display:flex;gap:10px;flex-wrap:wrap;padding-top:12px;border-top:1px solid var(--line);color:var(--muted);font-size:13px;font-weight:800}.social-reactions span{padding-right:10px;border-right:1px solid var(--line)}.social-reactions span:last-child{border-right:0}
 .compact-post p{color:var(--text)}
@@ -222,7 +222,7 @@ button{cursor:pointer}
   .home-network{grid-template-columns:220px minmax(0,1fr)}
   .home-network .network-rail:last-child{display:none}
   .network-rail{top:150px}
-  .hero .social-post h1{font-size:36px}
+  .hero .social-post h1{font-size:28px}
   .dashboard-grid,.finder,.profile-dashboard-hero,.profile-content-grid{grid-template-columns:1fr}
   .profile-sidebar{position:static}
   .profile-layout{grid-template-columns:280px minmax(0,1fr)}
@@ -262,5 +262,5 @@ button{cursor:pointer}
   .alert{align-items:flex-start;flex-direction:column}
   .strength-row{grid-template-columns:1fr}
   .hero{padding:16px 12px 28px}
-  .hero .social-post h1{font-size:32px}
+  .hero .social-post h1{font-size:24px}
 }
