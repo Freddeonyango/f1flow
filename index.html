@@ -361,5 +361,28 @@
 
   <script src="database.js"></script>
   <script src="app.js"></script>
+  <script>
+    // Theme switcher — applies data-theme to <html> and persists to localStorage
+    (function () {
+      // Restore saved theme on load
+      const saved = localStorage.getItem('f1flow-theme') || 'light';
+      document.documentElement.setAttribute('data-theme', saved);
+      document.querySelectorAll('.theme-option').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.theme === saved);
+      });
+
+      // Wire up buttons
+      document.querySelectorAll('.theme-option').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const theme = btn.dataset.theme;
+          document.documentElement.setAttribute('data-theme', theme);
+          localStorage.setItem('f1flow-theme', theme);
+          document.querySelectorAll('.theme-option').forEach(b =>
+            b.classList.toggle('active', b.dataset.theme === theme)
+          );
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
