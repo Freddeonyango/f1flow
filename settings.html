@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Settings - F1Flow</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=Syne:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="topbar">
+    <button class="brand" data-page="home" aria-label="Go to home">
+      <span class="brand-mark">F1</span>
+      <span class="brand-name">F1Flow</span>
+    </button>
+    <label class="social-search" aria-label="Search F1Flow">
+      <span>Search</span>
+      <input id="global-search" type="search" placeholder="Search students, mentors, schools">
+    </label>
+    <div class="nav-links" aria-label="Primary navigation">
+      <button class="nav-link" data-page="home">Home</button>
+      <button class="nav-link" data-page="profiles">Profiles</button>
+      <button class="nav-link" data-page="dashboard">Dashboard</button>
+      <button class="nav-link" data-page="mentors">Mentors</button>
+      <button class="nav-link" data-page="community">Community</button>
+      <button class="nav-link" data-page="travel">Travel</button>
+      <button class="nav-link" data-page="thinklab">Think Lab</button>
+      <button class="nav-link" data-page="arrival">Arrival</button>
+      <button class="nav-link" data-page="login">Login</button>
+    </div>
+    <div class="nav-actions">
+      <button class="icon-btn nav-settings" id="settings-toggle" aria-label="Settings" title="Settings">⚙️</button>
+      <button class="nav-cta" id="open-profile">Get Started</button>
+    </div>
+  </nav>
+
+  <main>
+    <section class="page shell">
+      <div class="settings-container">
+        <div class="settings-header">
+          <h1>Settings</h1>
+          <p>Customize your F1Flow experience with themes, preferences, and more.</p>
+        </div>
+
+        <!-- Theme Settings -->
+        <div class="settings-section">
+          <h2>Appearance</h2>
+          <div class="settings-group">
+            <label class="settings-label">Theme</label>
+            <p class="settings-description">Choose how F1Flow looks. Your preference is saved automatically.</p>
+            
+            <div class="theme-preview-grid">
+              <!-- Light Theme -->
+              <button class="theme-preview" data-theme="light" title="Light theme">
+                <div class="theme-preview-name">Light</div>
+                <div class="theme-preview-colors">
+                  <span style="background: #f3f2ef;"></span>
+                  <span style="background: #ffffff;"></span>
+                  <span style="background: #0a66c2;"></span>
+                  <span style="background: #1f2328;"></span>
+                </div>
+              </button>
+
+              <!-- Dim Theme -->
+              <button class="theme-preview" data-theme="dim" title="Dim theme">
+                <div class="theme-preview-name">Dim</div>
+                <div class="theme-preview-colors">
+                  <span style="background: #111827;"></span>
+                  <span style="background: #172033;"></span>
+                  <span style="background: #60a5fa;"></span>
+                  <span style="background: #f7f9fb;"></span>
+                </div>
+              </button>
+
+              <!-- Dark Theme -->
+              <button class="theme-preview" data-theme="dark" title="Dark theme">
+                <div class="theme-preview-name">Dark</div>
+                <div class="theme-preview-colors">
+                  <span style="background: #050505;"></span>
+                  <span style="background: #0f1115;"></span>
+                  <span style="background: #60a5fa;"></span>
+                  <span style="background: #e7e9ea;"></span>
+                </div>
+              </button>
+
+              <!-- Teal Theme -->
+              <button class="theme-preview" data-theme="teal" title="Teal theme">
+                <div class="theme-preview-name">Teal</div>
+                <div class="theme-preview-colors">
+                  <span style="background: #eef8f6;"></span>
+                  <span style="background: #ffffff;"></span>
+                  <span style="background: #0f766e;"></span>
+                  <span style="background: #10201d;"></span>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- General Settings -->
+        <div class="settings-section">
+          <h2>General</h2>
+          <div class="settings-group">
+            <label class="settings-label">Notifications</label>
+            <p class="settings-description">Manage how you receive updates about mentors, visa deadlines, and community activity.</p>
+            <div class="settings-toggle-group">
+              <button class="settings-toggle active" data-setting="notify-mentor">Mentor Alerts</button>
+              <button class="settings-toggle active" data-setting="notify-visa">Visa Reminders</button>
+              <button class="settings-toggle active" data-setting="notify-community">Community Updates</button>
+            </div>
+          </div>
+
+          <div class="settings-group">
+            <label class="settings-label">Privacy</label>
+            <p class="settings-description">Control who can see your profile and contact you.</p>
+            <div class="settings-toggle-group">
+              <button class="settings-toggle active" data-setting="profile-visible">Profile Visible</button>
+              <button class="settings-toggle" data-setting="accept-messages">Accept Direct Messages</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Account Settings -->
+        <div class="settings-section">
+          <h2>Account</h2>
+          <div class="settings-group">
+            <label class="settings-label">Account Actions</label>
+            <div class="account-actions">
+              <button class="btn small secondary" id="export-data">Export My Data</button>
+              <button class="btn small secondary" id="clear-cache">Clear Cache</button>
+              <button class="btn small secondary" id="reset-settings">Reset Settings</button>
+            </div>
+          </div>
+
+          <div class="settings-group">
+            <label class="settings-label">About</label>
+            <p class="settings-description">
+              <strong>F1Flow v1.0</strong><br>
+              A professional operating system for international students.<br>
+              <a href="#" style="color: var(--accent); text-decoration: none;">Learn more about F1Flow</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="database.js"></script>
+  <script src="app.js"></script>
+  <script>
+    // Settings page functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      // Theme preview buttons
+      const themeButtons = document.querySelectorAll('.theme-preview');
+      const currentTheme = document.documentElement.dataset.theme || 'light';
+      
+      themeButtons.forEach(btn => {
+        if (btn.dataset.theme === currentTheme) {
+          btn.classList.add('selected');
+        }
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          applyTheme(btn.dataset.theme);
+          
+          // Update selection
+          themeButtons.forEach(b => b.classList.remove('selected'));
+          btn.classList.add('selected');
+          
+          // Show notification
+          if (typeof toast === 'function') {
+            toast(`Theme changed to ${btn.dataset.theme.charAt(0).toUpperCase() + btn.dataset.theme.slice(1)}`);
+          }
+        });
+      });
+
+      // Settings toggles
+      const toggleButtons = document.querySelectorAll('.settings-toggle');
+      toggleButtons.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          btn.classList.toggle('active');
+          const settingName = btn.dataset.setting;
+          const isActive = btn.classList.contains('active');
+          
+          if (typeof localStorage !== 'undefined') {
+            localStorage.setItem(`f1flow.setting.${settingName}`, isActive);
+          }
+          
+          if (typeof toast === 'function') {
+            toast(`${settingName.replace(/-/g, ' ')} ${isActive ? 'enabled' : 'disabled'}`);
+          }
+        });
+      });
+
+      // Account actions
+      const exportBtn = document.getElementById('export-data');
+      if (exportBtn) {
+        exportBtn.addEventListener('click', () => {
+          if (typeof state !== 'undefined') {
+            const dataStr = JSON.stringify(state, null, 2);
+            const blob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `f1flow-data-${new Date().toISOString().split('T')[0]}.json`;
+            link.click();
+            URL.revokeObjectURL(url);
+            
+            if (typeof toast === 'function') {
+              toast('Your data has been exported');
+            }
+          }
+        });
+      }
+
+      const clearCacheBtn = document.getElementById('clear-cache');
+      if (clearCacheBtn) {
+        clearCacheBtn.addEventListener('click', () => {
+          if (typeof localStorage !== 'undefined') {
+            const keys = Object.keys(localStorage).filter(k => k.startsWith('f1flow'));
+            keys.forEach(k => localStorage.removeItem(k));
+            if (typeof toast === 'function') {
+              toast('Cache cleared. Please refresh the page.');
+            }
+          }
+        });
+      }
+
+      const resetBtn = document.getElementById('reset-settings');
+      if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+          if (confirm('Are you sure? This will reset all your settings to defaults.')) {
+            if (typeof localStorage !== 'undefined') {
+              const keys = Object.keys(localStorage).filter(k => k.startsWith('f1flow.setting'));
+              keys.forEach(k => localStorage.removeItem(k));
+            }
+            if (typeof applyTheme === 'function') {
+              applyTheme('light');
+            }
+            if (typeof toast === 'function') {
+              toast('Settings reset to defaults');
+            }
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>
