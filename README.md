@@ -1,65 +1,60 @@
-# F1Flow
+git clone [https://github.com/yourusername/f1flow.git](https://github.com/yourusername/f1flow.git)
+    cd f1flow
+    ```
 
-A dynamic project built with modern web technologies.
+2.  Install dependencies:
 
-## Overview
+```bash
+    npm install
+    # or
+    yarn install
+    ```
 
-F1Flow is a web-based project that combines frontend and backend technologies to deliver a seamless user experience. The project leverages JavaScript for interactivity, HTML for structure, and Python for backend processing.
+3.  Set up environment variables:
+Create a `.env.local` file in the root directory and add any required API keys or configuration endpoints:
 
-## Tech Stack
+```env
+    NEXT_PUBLIC_API_URL=your_backend_api_url
+    ```
 
-- **JavaScript** (63.3%) - Interactive frontend functionality
-- **HTML** (34.1%) - Markup and page structure
-- **Python** (2.6%) - Backend logic and server-side processing
+4.  Run the development server:
 
-## Getting Started
+```bash
+    npm run dev
+    # or
+    yarn dev
+    ```
 
-### Prerequisites
+5.  Open [http://localhost:3000](https://www.google.com/search?q=http://localhost:3000) in your browser to see the application running.
 
-- Node.js (for JavaScript dependencies)
-- Python 3.x (for backend functionality)
-- A modern web browser
+-----
 
-### Installation
+## 🎨 UI Guidelines & Code Standards
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/Freddeonyango/f1flow.git
-   cd f1flow
-   ```
+### Theme Engine
 
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
+Themes are managed contextually. Avoid hardcoding raw hex values in individual components; instead, utilize the global CSS variables defined in the styling system:
 
-3. Install Python dependencies (if applicable):
-   ```bash
-   pip install -r requirements.txt
-   ```
+*   `bg-primary`: Adapts to Light, Dim, Dark, or Teal.
+*   `text-main`: Ensures proper contrast alignment based on WCAG standards across all theme updates.
 
-## Usage
+### Component Logic
 
-[Add specific instructions on how to run and use the project]
+*   **Contextual Buttons:** The `Connect` action on profile cards should conditionally render based on the authentication state. If the `currentUser` matches the `profileUser`, replace the action with `Edit Profile`.
+*   **Independent Sidebar Scrolling:** The discovery sidebar operates on an independent `overflow-y: auto;` track to maintain a fixed central focus on the main profile viewpoint.
 
-## Features
+-----
 
-- [Feature 1]
-- [Feature 2]
-- [Feature 3]
+## 🗺️ Roadmap
 
-## Contributing
+-   [ ] Connect profile tags directly to live search execution.
+-   [ ] Complete integration of the interactive multi-phase Journey Timeline block.
+-   [ ] Implement secure peer-to-peer messaging for connecting students with trusted mentors.
+-   [ ] Deploy B2B university recruitment portals.
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+-----
 
-## License
+## 📄 License
 
-[Specify your license here - e.g., MIT, Apache 2.0, etc.]
-
-## Author
-
-**Freddeonyango**
-
-## Support
-
-For support, please open an issue on the [GitHub repository](https://github.com/Freddeonyango/f1flow).
+This project is proprietary and confidential. Unauthorized copying of these files via any medium is strictly prohibited.
+Copyright (c) 2026 F1Flow.
